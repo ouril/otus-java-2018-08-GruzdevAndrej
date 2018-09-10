@@ -68,9 +68,17 @@
                 </configuration>
 
             </plugin>
-            <!--plugin>
+            <plugin>
                 <groupId>com.github.wvengen</groupId>
                 <artifactId>proguard-maven-plugin</artifactId>
+                <version>2.0.14</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>net.sf.proguard</groupId>
+                        <artifactId>proguard-base</artifactId>
+                        <version>6.0.3</version>
+                    </dependency>
+                </dependencies>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -78,23 +86,21 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <maxMemory>1024m</maxMemory>
+                    <proguardVersion>6.0.3</proguardVersion>
+                    <obfuscate>true</obfuscate>
+                    <outjar>MyFirstMavenProject-relese.jar</outjar>
+                    <options>
+                        <option>
+                            -keep public class ru.otus.gruzdev.Main {public static void main(java.lang.String[]);}
+                        </option>
+                        <option>
+                            -dontwarn
+                        </option>
+                    </options>
 
-                    <proguardInclude>${basedir}/proguard.conf</proguardInclude>
-
-                    <exclusions>
-                        <exclusion>
-                            <groupId>com.yourcompany</groupId>
-                            <artifactId>data</artifactId>
-                        </exclusion>
-                    </exclusions>
-                    <libs>
-                        <lib>${java.home}/lib/rt.jar</lib>
-                        <lib>${java.home}/lib/jce.jar</lib>
-                        <lib>${java.home}/lib/ext/sunjce_provider.jar</lib>
-                    </libs>
                 </configuration>
-            </plugin-->
+            </plugin>
+
 
 
         </plugins>
